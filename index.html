@@ -1,172 +1,158 @@
 <!doctype html>
-
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Fable Cities</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-```
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%2312202c%27/%3E%3Cpath d=%27M6 26V14h5v12zm7 0V8h6v18zm8 0V17h5v9z%27 fill=%27%234fc3f7%27/%3E%3C/svg%3E" />
+  <title>Fable Cities</title>
 
-<style>
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #0b0f14;
-  }
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%2312202c%27/%3E%3Cpath d=%27M6 26V14h5v12zm7 0V8h6v18zm8 0V17h5v9z%27 fill=%27%234fc3f7%27/%3E%3C/svg%3E">
 
-  body {
-    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
-    color: #e8edf2;
-  }
-
-  #game {
-    position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
-    outline: none;
-    touch-action: none;
-  }
-
-  #ui-root {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  #ui-root > * {
-    pointer-events: auto;
-  }
-
-  #loading {
-    position: fixed;
-    inset: 0;
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background: radial-gradient(
-      1200px 800px at 50% 40%,
-      #16202b 0%,
-      #0b0f14 70%
-    );
-    transition: opacity 0.6s ease;
-  }
-
-  #loading.hidden {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  #loading h1 {
-    font-weight: 300;
-    letter-spacing: 0.35em;
-    font-size: 28px;
-    margin: 0 0 18px;
-    text-transform: uppercase;
-    color: #dfe7ef;
-  }
-
-  #loading .bar {
-    width: 320px;
-    height: 3px;
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-
-  #loading .bar > i {
-    display: block;
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #4fc3f7, #81d4fa);
-    transition: width 0.3s ease;
-  }
-
-  #loading .status {
-    margin-top: 12px;
-    font-size: 12px;
-    letter-spacing: 0.12em;
-    color: #8da0b3;
-    text-transform: uppercase;
-  }
-</style>
-
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
-    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
-  }
-}
-</script>
-```
-
-  </head>
-
-  <body>
-
-```
-<canvas id="game" tabindex="0"></canvas>
-
-<div id="ui-root"></div>
-
-<div id="loading">
-  <h1>Fable Cities</h1>
-
-  <div class="bar">
-    <i id="loading-bar"></i>
-  </div>
-
-  <div class="status" id="loading-status">
-    Initialising
-  </div>
-</div>
-
-<script>
-  let rCount = 0;
-  let rTimer = null;
-
-  function handleRRR(e) {
-    if (!e.key || e.key.toLowerCase() !== "r") {
-      return;
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #0b0f14;
     }
 
-    rCount++;
-
-    clearTimeout(rTimer);
-
-    rTimer = setTimeout(function() {
-      rCount = 0;
-    }, 900);
-
-    if (rCount >= 3) {
-      e.preventDefault();
-      e.stopPropagation();
-      e.stopImmediatePropagation();
-
-      rCount = 0;
-
-      window.location.href =
-        "https://makkapakka-7788.github.io/flashcards.com/?games=true";
+    body {
+      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, Roboto, sans-serif;
+      color: #e8edf2;
     }
-  }
 
-  window.addEventListener("keydown", handleRRR, true);
-  document.addEventListener("keydown", handleRRR, true);
-</script>
+    #game {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      outline: none;
+      touch-action: none;
+    }
 
-<script type="module" src="./src/main.js"></script>
-```
+    #ui-root {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
 
-  </body>
+    #ui-root > * {
+      pointer-events: auto;
+    }
+
+    #loading {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(
+        1200px 800px at 50% 40%,
+        #16202b 0%,
+        #0b0f14 70%
+      );
+      transition: opacity 0.6s ease;
+    }
+
+    #loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #loading h1 {
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      font-size: 28px;
+      margin: 0 0 18px;
+      text-transform: uppercase;
+      color: #dfe7ef;
+    }
+
+    #loading .bar {
+      width: 320px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    #loading .bar > i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #4fc3f7, #81d4fa);
+      transition: width 0.3s ease;
+    }
+
+    #loading .status {
+      margin-top: 12px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      color: #8da0b3;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+
+<body>
+
+  <canvas id="game" tabindex="0"></canvas>
+
+  <div id="ui-root"></div>
+
+  <div id="loading">
+    <h1>Fable Cities</h1>
+
+    <div class="bar">
+      <i id="loading-bar"></i>
+    </div>
+
+    <div class="status" id="loading-status">
+      Initialising
+    </div>
+  </div>
+
+  <script>
+    let rCount = 0;
+    let rTimer = null;
+
+    function handleRRR(e) {
+      if (!e.key || e.key.toLowerCase() !== "r") {
+        return;
+      }
+
+      rCount++;
+
+      clearTimeout(rTimer);
+
+      rTimer = setTimeout(function() {
+        rCount = 0;
+      }, 900);
+
+      if (rCount >= 3) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+
+        rCount = 0;
+
+        window.location.href =
+          "https://makkapakka-7788.github.io/flashcards.com/?games=true";
+      }
+    }
+
+    window.addEventListener("keydown", handleRRR, true);
+    document.addEventListener("keydown", handleRRR, true);
+  </script>
+
+  <script type="module" src="/src/main.js"></script>
+
+</body>
 </html>
